@@ -1,35 +1,61 @@
-const InviteUserScheem = require("../Model/InviteEmployee");
-// const nodemailer = require("nodemailer");
-// const { getMaxListeners } = require("../Model/InviteEmployee");
-const ApiKey = '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'
+const InviteUserScheema = require("../Model/InviteEmployee");
+const ApiKey = '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'
 const sgEmail = require("@sendgrid/mail")
-
 module.exports = {
-
     CreateInviteUserData: async (req, res) => {
         try {
+            // send mail
             sgEmail.setApiKey(ApiKey)
             const Message = {
                 to: req.body.Email,
-                from: "sabk70056@gmail.com",
-                subject: "Hello from Shariqmehmood",
-                text: "Hello from Shariqmehmood",
-                html: `<h1 style="border:2px solid black;text-align:center" >${req.body.Message}</h1>`
+                from: "myasirkhan575@gmail.com",
+                subject: "NocodeAi",
+                text: "Hello from NocodeAI.org",
+                html: `<h1 style="border:2px solid black;text-align:center">${req.body.Message}</h1>`
             }
-            let InviteuserData = new InviteUserScheem({
+            // Chack Email if Email ia occur show err
+            const Email = req.body.Email;
+            console.log("email ", Email)
+            let checkEmail = await InviteUserScheema.findOne({ Email: Email }).exec()
+            console.log(checkEmail, "check email")
+            if (checkEmail) {
+                return res.send({
+                    status: 400,
+                    sucess: false,
+                    msg: "user Already invites",
+                })
+            }
+            let InviteuserData = new InviteUserScheema({
+              Name: req.body.Name,
                 Email: req.body.Email,
                 Message: req.body.Message
-
             })
-            sgEmail.send(Message)
-                .then(res => console.log("Email send...."))
-                .catch(error => console.log("error"))
-
-            res.send({
-                status: 200,
-                sucess: true,
-                msg: "User Invite Success",
-            })
+            if (req.body.Email === "") {
+                res.send({
+                    status: 203,
+                    sucess: false,
+                    msg: "ALl Feild Required",
+                })
+        }
+            else if (req.body.Message === "") {
+                res.send({
+                    status: 203,
+                    sucess: false,
+                    msg: "ALl Feild Required",
+                })
+            }
+            else {
+                sgEmail.send(Message)
+                    .then(res => console.log("Email send...."))
+                    .catch(error => console.log("error"))
+                res.send({
+                    status: 201,
+                    sucess: true,
+                    msg: "User Invite Success",
+                })
+                console.log(InviteuserData)
+                InviteuserData.save()
+            }
         }
         catch (err) {
             console.log(err)
@@ -38,7 +64,6 @@ module.exports = {
                 sucess: false,
                 msg: "server err",
             })
-
         }
     }
 }

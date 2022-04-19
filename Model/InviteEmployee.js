@@ -1,15 +1,18 @@
- const mongoose=require("mongoose");
-const InviteUser=mongoose.Schema({
-  
-    Email:{
-        type:String,
-        required:true,
+const mongoose = require("mongoose");
+const InviteUser = mongoose.Schema({
+    Name: {
+        type: String,
+        required: true,
     },
-    Message:{
-        type:String,
-        required:true,
+    Email: {
+        type: String,
+        required: true,
+    },
+    Message: {
+        type: String,
+        required: true,
     },
 })
 
-let InviteUserScheem=mongoose.model("UserInvite",InviteUser);
-module.exports=InviteUserScheem;
+let InviteUserScheema = mongoose.model("InviteUserScheema", InviteUser);
+module.exports = InviteUserScheema;
