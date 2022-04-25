@@ -1,4 +1,3 @@
-const { number, string, required } = require("joi");
 const mongoose = require("mongoose");
 const AddEmployee = mongoose.Schema({
     Name: {

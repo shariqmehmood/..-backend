@@ -1,5 +1,3 @@
-const { result } = require("@hapi/joi/lib/base");
-const { path } = require("express/lib/application");
 const AddEmployeeScheema = require("../Model/AddEmployee");
 const InviteUserScheema = require("../Model/InviteEmployee");
 const cloudinary = require("cloudinary").v2

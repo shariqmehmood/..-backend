@@ -1,9 +1,8 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const AllEmployeeData = require("../Model/AddEmployee")
+
+const RejectLeave = require("../Model/RejectLeave")
 module.exports = {
-    AllEmployeeData: async (req, res) => {
-        AllEmployeeData.find({})
+    RejectLeave: async (req, res) => {
+        RejectLeave.find({})
             .then(result => {
                 // console.log(result.length)
                 res.send(result)
@@ -16,4 +15,3 @@ module.exports = {
             })
     }
 }
-

@@ -15,12 +15,23 @@ app.use(cors());
 const InviteEmployee = require("./Routes/inviteEmployeeRoute");
 const AddEmployee=require("./Routes/AddEMployeeRoute")
 const AllEmployeeData=require("./Routes/AddEMployeeRoute")
+const CreateAllLeaveData=require("./Routes/AllLeaveRoute")
+const getAllLeave=require("./Routes/AllLeaveRoute")
+const AcceptLeave=require("./Routes/AcceptLeaveRoute")
+const RejectLeave=require("./Routes/RejectLeaveRoute")
 app.use(fileUpload({
     useTempFiles:true
 }))
 app.use('/' ,InviteEmployee);
+app.use('/',getAllLeave)
 app.use('/' ,AddEmployee);
+app.use('/' ,CreateAllLeaveData);
 app.use('/' ,AllEmployeeData);
+app.use('/' ,AcceptLeave);
+app.use('/' ,RejectLeave);
+
+
+
 let PORT = process.env.PORT || 3001;
 app.use(express.static("public"));
 app.use("/public", express.static("public"));
