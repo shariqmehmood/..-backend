@@ -1,2 +1,2 @@
 # ..-backend
-tun with nodemon
+Run with nodemon
